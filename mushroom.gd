@@ -7,7 +7,7 @@ var velocidade :float = 40.0
 var aceleracao: float = 20
 var estado_atual = Estados.PATRULHA
 var velocidade_maxima_x: float = 100.0
-var direcao = 1
+var direcao = -1
 var player :CharacterBody2D = null
 @onready var AreaPlayer:Area2D = $Area2D
 @onready var timer:Timer = $Timer
@@ -21,7 +21,7 @@ func _physics_process(delta):
 		velocity.y += gravidade *delta
 	if estado_atual == Estados.PATRULHA:
 		patrulha()
-	if estado_atual == Estados.CACADA:
+	elif estado_atual == Estados.CACADA:
 		cacada()
 	
 	if is_on_wall()and pode_virar == true:
@@ -34,7 +34,10 @@ func _physics_process(delta):
 func patrulha():
 		if estado_atual == Estados.PATRULHA:
 			velocity.x = direcao * velocidade
-			sprite.flip_h = (direcao == 1) 
+			if direcao == 1:
+				sprite.flip_h = true	
+			if direcao == -1:
+				sprite.flip_h = false 
 	
 			$AnimatedSprite2D.play("run_mush")
 	
@@ -60,7 +63,7 @@ func cacada():
 		var pos_inimigo = self.global_position
 		var pos_player = player.global_position
 		var vetor_direcao = pos_player - pos_inimigo
-		var direcao_calculada = sign(vetor_direcao.x) # sign() retorna -1, 0, ou 1
+		var direcao_calculada = sign(vetor_direcao.x)
 
 		print("==================")
 		print("Pos Player: ", pos_player.x)
@@ -73,10 +76,13 @@ func cacada():
 		if direcao_calculada != 0:
 			direcao = direcao_calculada
 		
+
 		velocity.x = direcao * velocidade_maxima_x
-		
-		sprite.flip_h = (direcao == 1) # Lógica para sprite original virado para a ESQUERDA
-					
+		if direcao == 1:
+			sprite.flip_h = true
+		elif direcao == -1:
+				sprite.flip_h = false
+			
 		$AnimatedSprite2D.play("run_mush")
 			
 
