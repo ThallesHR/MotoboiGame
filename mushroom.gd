@@ -3,10 +3,10 @@ var gravidade = ProjectSettings.get_setting("physics/2d/default_gravity")
 enum Estados{
 	PATRULHA,CACADA
 }
-var velocidade :float = 40.0
+var velocidade :float = 20.0
 var aceleracao: float = 20
 var estado_atual = Estados.PATRULHA
-var velocidade_maxima_x: float = 100.0
+var velocidade_maxima_x: float = 80.0
 var direcao = -1
 var player :CharacterBody2D = null
 @onready var AreaPlayer:Area2D = $Area2D
@@ -23,16 +23,15 @@ func _physics_process(delta):
 		patrulha()
 	elif estado_atual == Estados.CACADA:
 		cacada()
-	
-	if is_on_wall()and pode_virar == true:
-				direcao *= -1
-				pode_virar = false
-				$Timer2.start()
 
 	move_and_slide()
 
 func patrulha():
 		if estado_atual == Estados.PATRULHA:
+			if is_on_wall()and pode_virar == true:
+				direcao *= -1
+				pode_virar = false
+				$Timer2.start()
 			velocity.x = direcao * velocidade
 			if direcao == 1:
 				sprite.flip_h = true	
@@ -58,8 +57,7 @@ func cacada():
 			return
 
 		timer.stop()
-
-		# --- INÍCIO DO DIAGNÓSTICO ---
+		
 		var pos_inimigo = self.global_position
 		var pos_player = player.global_position
 		var vetor_direcao = pos_player - pos_inimigo
@@ -70,9 +68,7 @@ func cacada():
 		print("Pos Inimigo: ", pos_inimigo.x)
 		print("Vetor (Player - Inimigo): ", vetor_direcao.x)
 		print("DIREÇÃO FINAL CALCULADA: ", direcao_calculada)
-		# --- FIM DO DIAGNÓSTICO ---
-
-		# Se o resultado for 0 (alinhado), mantenha a última direção
+		
 		if direcao_calculada != 0:
 			direcao = direcao_calculada
 		
@@ -88,7 +84,7 @@ func cacada():
 
 
 func _on_area_2d_body_entered(body):
-	if body is CharacterBody2D:
+	if body.is_in_group("player"):
 		print("Entrou na area")
 		player = body
 		estado_atual = Estados.CACADA

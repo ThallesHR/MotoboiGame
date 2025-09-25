@@ -125,8 +125,8 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c6upu"]
 radius = 14.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_m2lam"]
-radius = 95.02105
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pl5ep"]
+size = Vector2(193, 48)
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 3
@@ -147,7 +147,8 @@ shape = SubResource("CapsuleShape2D_c6upu")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_m2lam")
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_pl5ep")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
