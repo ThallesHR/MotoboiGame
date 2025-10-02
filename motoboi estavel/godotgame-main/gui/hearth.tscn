@@ -1,0 +1,80 @@
+[gd_scene load_steps=14 format=3 uid="uid://djataakiii0sc"]
+
+[ext_resource type="Texture2D" uid="uid://b1py05scpx52g" path="res://gui/hearths/hearths0.png" id="1_h3v0s"]
+[ext_resource type="Script" uid="uid://dnmo2i8v8pdpf" path="res://gui/hearth.gd" id="1_tkmg8"]
+[ext_resource type="Texture2D" uid="uid://chp2imrgbg6vq" path="res://gui/hearths/hurt/hurt0.png" id="2_rv0x0"]
+[ext_resource type="Texture2D" uid="uid://bwi336vyiss3s" path="res://gui/hearths/hearths1.png" id="2_tkmg8"]
+[ext_resource type="Texture2D" uid="uid://cfdkmb4o77koa" path="res://gui/hearths/hearths2.png" id="3_uhafw"]
+[ext_resource type="Texture2D" uid="uid://c64d4xs6kwxfk" path="res://gui/hearths/hurt/hurt1.png" id="3_urj0l"]
+[ext_resource type="Texture2D" uid="uid://di4yajujrf10b" path="res://gui/hearths/hurt/hurt2.png" id="4_vd5w1"]
+[ext_resource type="Texture2D" uid="uid://fa7j6prxcnwm" path="res://gui/hearths/hearths3.png" id="4_vupku"]
+[ext_resource type="Texture2D" uid="uid://dpufg24np1kkm" path="res://gui/hearths/hearths4.png" id="5_0v6iq"]
+[ext_resource type="Texture2D" uid="uid://bmedaumx1pooj" path="res://gui/hearths/hurt/hurt3.png" id="5_76wgm"]
+[ext_resource type="Texture2D" uid="uid://qlomh7shqs80" path="res://gui/hearths/hurt/hurt4.png" id="6_o55n2"]
+[ext_resource type="Texture2D" uid="uid://b8usv8v84i8rk" path="res://gui/hearths/nolife.png" id="12_urj0l"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3ai6f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rv0x0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_urj0l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vd5w1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_76wgm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_o55n2")
+}],
+"loop": false,
+"name": &"hearth_damage",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_h3v0s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_tkmg8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_uhafw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vupku")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0v6iq")
+}],
+"loop": true,
+"name": &"hearth_max",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_urj0l")
+}],
+"loop": true,
+"name": &"hearth_nolife",
+"speed": 5.0
+}]
+
+[node name="HearthGui" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(11, 11)
+offset_right = 11.0
+offset_bottom = 11.0
+script = ExtResource("1_tkmg8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4.5833335, 4.5833335)
+sprite_frames = SubResource("SpriteFrames_3ai6f")
+animation = &"hearth_damage"
+frame = 4
+frame_progress = 1.0
+centered = false
