@@ -1,0 +1,327 @@
+[gd_scene load_steps=38 format=3 uid="uid://bcejlp635w4xo"]
+
+[ext_resource type="Texture2D" uid="uid://ca82vvtsds0yi" path="res://jump_animation/sprite_25.png" id="1_7hik5"]
+[ext_resource type="Texture2D" uid="uid://cw3nrjpsvx6c2" path="res://jump_animation/sprite_26.png" id="2_qtqh7"]
+[ext_resource type="Texture2D" uid="uid://d1wukxxiyxpp8" path="res://jump_animation/sprite_23.png" id="3_2wuci"]
+[ext_resource type="Texture2D" uid="uid://c3bbkavskem06" path="res://jump_animation/sprite_24.png" id="4_iruf7"]
+[ext_resource type="Texture2D" uid="uid://se1ydmaf626k" path="res://run/sprite_17.png" id="5_j5n4i"]
+[ext_resource type="Texture2D" uid="uid://578qlv4tdofg" path="res://run/sprite_18.png" id="6_634y6"]
+[ext_resource type="Texture2D" uid="uid://bmtj6pgbkc4fe" path="res://run/sprite_19.png" id="7_efrwb"]
+[ext_resource type="Texture2D" uid="uid://br2mdsnpev7jg" path="res://run/sprite_20.png" id="8_hiqhm"]
+[ext_resource type="Texture2D" uid="uid://bj0ui1qr3ih57" path="res://run/sprite_21.png" id="9_tkwlq"]
+[ext_resource type="Texture2D" uid="uid://c3b5mruescduf" path="res://run/sprite_22.png" id="10_hl5qd"]
+[ext_resource type="Texture2D" uid="uid://ck6u04c1wwe22" path="res://soco/soco0.png" id="11_efrwb"]
+[ext_resource type="Texture2D" uid="uid://dwuole3yliwjl" path="res://walk/boi0.png" id="11_ek41f"]
+[ext_resource type="Texture2D" uid="uid://dbr72yfbds01x" path="res://soco/soco1.png" id="12_hiqhm"]
+[ext_resource type="Texture2D" uid="uid://de4dkvasdfkqw" path="res://walk/boi1.png" id="12_khis8"]
+[ext_resource type="Texture2D" uid="uid://640iukhxo14x" path="res://walk/boi2.png" id="13_b88wv"]
+[ext_resource type="Texture2D" uid="uid://db1kwny7v7nf7" path="res://soco/soco2.png" id="13_tkwlq"]
+[ext_resource type="Texture2D" uid="uid://c5u7n80htrs31" path="res://soco/soco3.png" id="14_hl5qd"]
+[ext_resource type="Texture2D" uid="uid://ch7tvqokfkbys" path="res://walk/boi3.png" id="14_pgbbb"]
+[ext_resource type="Texture2D" uid="uid://cwhlpiknmm531" path="res://walk/boi4.png" id="15_331ug"]
+[ext_resource type="Texture2D" uid="uid://doccc11726ad7" path="res://soco/soco4.png" id="15_ek41f"]
+[ext_resource type="Texture2D" uid="uid://gmfew1ei6gw3" path="res://soco/soco5.png" id="16_khis8"]
+[ext_resource type="Texture2D" uid="uid://bex5uhh5fx0yi" path="res://walk/boi5.png" id="16_ny14h"]
+[ext_resource type="Texture2D" uid="uid://crdf45y6qoktb" path="res://walk/boi6.png" id="17_ibah8"]
+[ext_resource type="Texture2D" uid="uid://c7px0snxhpi42" path="res://walk/boi7.png" id="18_3iwfv"]
+[ext_resource type="Texture2D" uid="uid://b15bvyvub8el8" path="res://idle/sprite_08.png" id="19_qwsg1"]
+[ext_resource type="Texture2D" uid="uid://brvysgatfs7in" path="res://idle/sprite_09.png" id="20_1xqrm"]
+[ext_resource type="Texture2D" uid="uid://bp8ypgbyb2ijm" path="res://idle/sprite_10.png" id="21_bfour"]
+[ext_resource type="Texture2D" uid="uid://dfnk3q58o42qa" path="res://idle/sprite_11.png" id="22_8gr2b"]
+[ext_resource type="Texture2D" uid="uid://dfs03doxoa1h8" path="res://idle/sprite_12.png" id="23_vl8ci"]
+[ext_resource type="Texture2D" uid="uid://cjpppv3c7y7bp" path="res://idle/sprite_13.png" id="24_ieltc"]
+[ext_resource type="Texture2D" uid="uid://b3htrtsjt4v5n" path="res://idle/sprite_14.png" id="25_fddr8"]
+[ext_resource type="Texture2D" uid="uid://d31p5m3lngv11" path="res://idle/sprite_15.png" id="26_oybyf"]
+
+[sub_resource type="GDScript" id="GDScript_ajfva"]
+script/source = "extends CharacterBody2D
+
+signal healthChange
+
+@export var vida_maxima: int = 5
+@onready var vida_atual = vida_maxima
+@export var dano: int = 10
+
+var aceleracao: float = 600
+var desaceleracao: float = 1000
+var velocidade_maxima_x: float = 100
+
+var jump_height: float = 50
+var time_apice_pulo: float = 0.3
+var pulo_speed: float
+var gravidade: float
+
+var is_attacking: bool = false
+
+func _ready():
+	pulo_speed = (jump_height * 2) / time_apice_pulo
+	gravidade = (jump_height * 2) / pow(time_apice_pulo, 2)
+	
+	# Inicializa vida_atual com stats.health
+	vida_atual = vida_maxima
+
+func _physics_process(delta):
+	velocity.y += gravidade * delta
+	handle_input(delta)
+	move_and_slide()
+	update_animations()
+
+func handle_input(delta):
+	if is_attacking:
+		velocity.x = move_toward(velocity.x, 0, desaceleracao * delta)
+		return
+
+	var input_axis = Input.get_axis(\"ui_left\", \"ui_right\")
+
+	if input_axis != 0:
+		var target_speed = velocidade_maxima_x
+		if Input.is_action_pressed(\"run\"):
+			target_speed *= 2
+		velocity.x = move_toward(velocity.x, target_speed * input_axis, aceleracao * delta)
+	else:
+		velocity.x = move_toward(velocity.x, 0, desaceleracao * delta)
+
+	if Input.is_action_just_pressed(\"ui_jump\") and is_on_floor():
+		velocity.y = -pulo_speed
+
+	if Input.is_action_just_pressed(\"ui_punch\") and is_on_floor():
+		is_attacking = true
+		$AnimatedSprite2D.play(\"animation_soco\")
+
+func update_animations():
+	if is_attacking:
+		return
+
+	if not is_on_floor():
+		if velocity.y < 0:
+			$AnimatedSprite2D.play(\"animation_jump\")
+		else:
+			$AnimatedSprite2D.play(\"animation_fall\")
+	else:
+		var input_axis = Input.get_axis(\"ui_left\", \"ui_right\")
+		if input_axis != 0:
+			$AnimatedSprite2D.flip_h = (input_axis < 0)
+			if abs(velocity.x) > velocidade_maxima_x + 1:
+				$AnimatedSprite2D.play(\"animation_run\")
+			else:
+				$AnimatedSprite2D.play(\"animation_walk\")
+		else:
+			$AnimatedSprite2D.play(\"idle\")
+
+func _on_animated_sprite_2d_animation_finished():
+	if $AnimatedSprite2D.animation == \"animation_soco\":
+		is_attacking = false
+
+# === Função take_damage adaptada para atualizar stats.health e vida_atual ===
+func take_damage(amount: int):
+	vida_atual = clamp(vida_atual - amount, 0, vida_maxima)
+	healthChange.emit(vida_atual)
+	print(\"Player tomou dano! Vida: \", vida_atual)
+	
+	if vida_atual <= 0:
+		print(\"Player Morreu!\")
+
+
+func perform_attack():
+	var attack_shape = CircleShape2D.new()
+	attack_shape.radius = 25
+	var attack_lifetime = 0.2
+
+	var hitbox = Hitbox.new()
+	hitbox.damage_amount = dano
+	hitbox.hitbox_lifetime = attack_lifetime
+	hitbox.shape = attack_shape
+
+	hitbox.set_collision_layer_value(4, true)
+	hitbox.set_collision_mask_value(6, true)
+
+	var direcao_ataque = -1 if $AnimatedSprite2D.flip_h else 1
+	var attack_position = Vector2(30 * direcao_ataque, -5)
+	hitbox.global_position = global_position + attack_position
+
+	get_parent().add_child(hitbox)
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5ef02"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7hik5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_qtqh7")
+}],
+"loop": true,
+"name": &"animation_fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_2wuci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_iruf7")
+}],
+"loop": true,
+"name": &"animation_jump",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_j5n4i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_634y6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_efrwb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_hiqhm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_tkwlq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_hl5qd")
+}],
+"loop": true,
+"name": &"animation_run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_efrwb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_hiqhm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_tkwlq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_hl5qd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ek41f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_khis8")
+}],
+"loop": false,
+"name": &"animation_soco",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_ek41f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_khis8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_b88wv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_pgbbb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_331ug")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ny14h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_ibah8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_3iwfv")
+}],
+"loop": true,
+"name": &"animation_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_qwsg1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_1xqrm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_bfour")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_8gr2b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_vl8ci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_ieltc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_fddr8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_oybyf")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pfmca"]
+size = Vector2(20, 28.5155)
+
+[sub_resource type="GDScript" id="GDScript_efrwb"]
+script/source = "class_name HurtboxP extends Area2D
+
+func _ready() -> void:
+	monitoring = false
+
+	
+func receive_hit(damage:int)->void:
+	if owner.has_method(\"take_damage\"):
+		owner.take_damage(damage)
+	else:
+		print(\"ERRO: O Dono não tem função\")
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tkwlq"]
+size = Vector2(19.35636, 28.411121)
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 2
+collision_mask = 17
+script = SubResource("GDScript_ajfva")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.18824, 1.0863)
+sprite_frames = SubResource("SpriteFrames_5ef02")
+animation = &"animation_soco"
+frame = 4
+frame_progress = 0.73674345
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(1, -4.25775)
+shape = SubResource("RectangleShape2D_pfmca")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[node name="HurtboxP" type="Area2D" parent="."]
+scale = Vector2(1.18824, 1.0863)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = SubResource("GDScript_efrwb")
+metadata/_custom_type_script = "uid://dhewowrluil16"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxP"]
+position = Vector2(0.42079088, -4.205559)
+scale = Vector2(0.9999999, 0.99999964)
+shape = SubResource("RectangleShape2D_tkwlq")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
