@@ -1,0 +1,77 @@
+[gd_scene load_steps=14 format=3 uid="uid://be2rsqj5fq6o"]
+
+[ext_resource type="Texture2D" uid="uid://dprfx6wsldqii" path="res://Npcs/sprite_0.png" id="1_i5h7t"]
+[ext_resource type="Script" uid="uid://bvpe5frnrxg13" path="res://npc_1.gd" id="1_pvfg5"]
+[ext_resource type="Texture2D" uid="uid://btghf2j7oq5ct" path="res://Npcs/sprite_1.png" id="2_u4vdn"]
+[ext_resource type="Texture2D" uid="uid://ds5h5p7ueufrx" path="res://Npcs/sprite_2.png" id="3_pvfg5"]
+[ext_resource type="PackedScene" uid="uid://cby3je5g3mwds" path="res://Interactable.tscn" id="5_7r771"]
+[ext_resource type="PackedScene" uid="uid://b2gx08t5h5bxu" path="res://text_box.tscn" id="5_q5jf0"]
+[ext_resource type="Texture2D" uid="uid://ru0y5rlko14i" path="res://Npcs/sprite_3.png" id="6_75osw"]
+[ext_resource type="Texture2D" uid="uid://ccfj1nprc4tq4" path="res://Npcs/sprite_4.png" id="7_3uubs"]
+[ext_resource type="Texture2D" uid="uid://bcfnxipreo7rl" path="res://Npcs/sprite_5.png" id="8_loh16"]
+[ext_resource type="Texture2D" uid="uid://7t3xaw3sy4ye" path="res://Npcs/sprite_6.png" id="9_u72n3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7r771"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_i5h7t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_u4vdn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pvfg5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_75osw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3uubs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_loh16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_u72n3")
+}],
+"loop": false,
+"name": &"voando",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q5jf0"]
+size = Vector2(22, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pvfg5"]
+size = Vector2(22, 31)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_pvfg5")
+
+[node name="TextBox" parent="." instance=ExtResource("5_q5jf0")]
+offset_left = -92.0
+offset_top = -75.0
+offset_right = -92.0
+offset_bottom = -75.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, 0)
+sprite_frames = SubResource("SpriteFrames_7r771")
+animation = &"voando"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -8.5)
+shape = SubResource("RectangleShape2D_q5jf0")
+
+[node name="Interactable" parent="." instance=ExtResource("5_7r771")]
+interact_name = "E para interagir"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+position = Vector2(2, -8.5)
+shape = SubResource("RectangleShape2D_pvfg5")

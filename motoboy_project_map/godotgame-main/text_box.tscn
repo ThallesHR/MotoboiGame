@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2gx08t5h5bxu"]
+
+[ext_resource type="Script" uid="uid://tdt1ye5p4l04" path="res://text_box.gd" id="1_5tto5"]
+[ext_resource type="Texture2D" uid="uid://cpsatawipo7br" path="res://textbox/PC _ Computer - Undertale - Miscellaneous - Text Bubbles.png" id="2_5tto5"]
+[ext_resource type="FontFile" uid="uid://b8ewvry8ia7d6" path="res://DeterminationMonoWebRegular-Z5oq.ttf" id="3_ejigk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_74mx6"]
+font = ExtResource("3_ejigk")
+font_size = 13
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[node name="TextBox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5tto5")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 48.0
+texture = ExtResource("2_5tto5")
+patch_margin_left = 3
+patch_margin_top = 2
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -21.0
+offset_right = -3.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_74mx6")
+autowrap_mode = 3
+
+[node name="TextTimer" type="Timer" parent="."]

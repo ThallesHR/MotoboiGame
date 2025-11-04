@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bcejlp635w4xo"]
+[gd_scene load_steps=52 format=3 uid="uid://bcejlp635w4xo"]
 
 [ext_resource type="Texture2D" uid="uid://ca82vvtsds0yi" path="res://jump_animation/sprite_25.png" id="1_7hik5"]
 [ext_resource type="Texture2D" uid="uid://ci4fjehqt6heh" path="res://Damage/damage0.png" id="1_hl5qd"]
@@ -45,6 +45,7 @@
 [ext_resource type="Texture2D" uid="uid://d31p5m3lngv11" path="res://idle/sprite_15.png" id="26_oybyf"]
 [ext_resource type="Script" uid="uid://cr1xdy1k8qdmc" path="res://Hitbox.gd" id="33_hiqhm"]
 [ext_resource type="Script" uid="uid://cxpqj6vsfqgyc" path="res://PlayerHurtbox.gd" id="36_ek41f"]
+[ext_resource type="PackedScene" uid="uid://bvfpmfp36dlyv" path="res://interacting_component.tscn" id="46_bfour"]
 
 [sub_resource type="GDScript" id="GDScript_ajfva"]
 script/source = "extends CharacterBody2D
@@ -446,7 +447,7 @@ script = SubResource("GDScript_ajfva")
 position = Vector2(6.9999995, 0)
 scale = Vector2(1.18824, 1.0863)
 sprite_frames = SubResource("SpriteFrames_5ef02")
-animation = &"animation_damage"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -486,6 +487,8 @@ one_shot = true
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="InteractingComponent" parent="." instance=ExtResource("46_bfour")]
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]
