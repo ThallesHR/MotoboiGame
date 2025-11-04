@@ -1,8 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://bu4tois6ahmb1"]
+[gd_scene load_steps=19 format=3 uid="uid://bu4tois6ahmb1"]
 
 [ext_resource type="Script" uid="uid://cx8jtg2qsdmvw" path="res://world.gd" id="1_ky6ig"]
 [ext_resource type="PackedScene" uid="uid://bcejlp635w4xo" path="res://player.tscn" id="15_f6vqc"]
-[ext_resource type="PackedScene" uid="uid://be2rsqj5fq6o" path="res://Npc 1.tscn" id="16_yl1x6"]
 [ext_resource type="Texture2D" uid="uid://p32i4beqie4w" path="res://tile cenario/Tileset.png" id="23_mrc2g"]
 [ext_resource type="Texture2D" uid="uid://bkt3qx7ksyenf" path="res://tile objetos/2_ladder.png" id="24_x6mos"]
 [ext_resource type="Texture2D" uid="uid://cwr58tf83xtvv" path="res://tile objetos/2_willow.png" id="26_v0hbj"]
@@ -609,8 +608,5 @@ position = Vector2(931, 252)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("15_f6vqc")]
 position = Vector2(-10, 203)
-
-[node name="CharacterBody2D2" parent="." instance=ExtResource("16_yl1x6")]
-position = Vector2(-196, 216)
 
 [connection signal="pressed" from="CanvasLayer/Label/MarginContainer/VBoxContainer/Button" to="CanvasLayer" method="_on_button_pressed"]

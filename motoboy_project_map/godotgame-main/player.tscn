@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://bcejlp635w4xo"]
+[gd_scene load_steps=51 format=3 uid="uid://bcejlp635w4xo"]
 
 [ext_resource type="Texture2D" uid="uid://ca82vvtsds0yi" path="res://jump_animation/sprite_25.png" id="1_7hik5"]
 [ext_resource type="Texture2D" uid="uid://ci4fjehqt6heh" path="res://Damage/damage0.png" id="1_hl5qd"]
@@ -45,7 +45,6 @@
 [ext_resource type="Texture2D" uid="uid://d31p5m3lngv11" path="res://idle/sprite_15.png" id="26_oybyf"]
 [ext_resource type="Script" uid="uid://cr1xdy1k8qdmc" path="res://Hitbox.gd" id="33_hiqhm"]
 [ext_resource type="Script" uid="uid://cxpqj6vsfqgyc" path="res://PlayerHurtbox.gd" id="36_ek41f"]
-[ext_resource type="PackedScene" uid="uid://bvfpmfp36dlyv" path="res://interacting_component.tscn" id="46_bfour"]
 
 [sub_resource type="GDScript" id="GDScript_ajfva"]
 script/source = "extends CharacterBody2D
@@ -80,6 +79,10 @@ var is_attacking: bool = false
 var is_dead: bool = false
 var is_taking_damage: bool = false # Renomeado para 'is_invincible' mentalmente
 
+var can_double_jump: bool = true
+var has_double_jumped: bool = false
+
+
 # --- Referência ao novo Timer ---
 @onready var hurt_timer: Timer = $HurtTimer
 func _ready():
@@ -97,6 +100,11 @@ func _physics_process(delta):
 		
 	# A gravidade agora é aplicada fora de handle_input
 	velocity.y += gravidade * delta
+	
+	if is_on_floor():
+		can_double_jump = true
+		has_double_jumped = false
+
 
 	# Se estiver tomando dano, a lógica de knockback (velocidade) já foi aplicada
 	# Não chamamos handle_input, mas o move_and_slide ainda roda
@@ -122,8 +130,15 @@ func handle_input(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, desaceleracao * delta)
 	
-	if Input.is_action_just_pressed(\"ui_jump\") and is_on_floor():
-		velocity.y = -pulo_speed
+	if Input.is_action_just_pressed(\"ui_jump\"):
+		if is_on_floor():
+			velocity.y = -pulo_speed * 0.9
+		elif can_double_jump and not has_double_jumped:
+			velocity.y = -pulo_speed
+			has_double_jumped = true
+			can_double_jump = false
+			$AnimatedSprite2D.play(\"animation_jump\") # ou som de efeito
+
 	
 	if Input.is_action_just_pressed(\"ui_punch\") and is_on_floor():
 		is_attacking = true
@@ -447,7 +462,7 @@ script = SubResource("GDScript_ajfva")
 position = Vector2(6.9999995, 0)
 scale = Vector2(1.18824, 1.0863)
 sprite_frames = SubResource("SpriteFrames_5ef02")
-animation = &"idle"
+animation = &"animation_damage"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -487,8 +502,6 @@ one_shot = true
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
-
-[node name="InteractingComponent" parent="." instance=ExtResource("46_bfour")]
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]
