@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://bc2ptjkkrkb2a"]
+
+[ext_resource type="Script" uid="uid://3ooxwx8gw32y" path="res://cabana_salvar.gd" id="1_i4jpx"]
+[ext_resource type="Texture2D" uid="uid://2wmxtwhlt70i" path="res://descanso/FPWeaponeer_Prop_Tent.png" id="1_oh3o7"]
+[ext_resource type="PackedScene" uid="uid://b2gx08t5h5bxu" path="res://text_box.tscn" id="2_kpv0q"]
+[ext_resource type="PackedScene" uid="uid://cby3je5g3mwds" path="res://Interactable.tscn" id="2_o5amm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5amm"]
+size = Vector2(81, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4jpx"]
+size = Vector2(95, 48)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_i4jpx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_oh3o7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7.5, 14)
+shape = SubResource("RectangleShape2D_o5amm")
+
+[node name="Interactable" parent="." instance=ExtResource("2_o5amm")]
+interact_name = "E para descansar"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+position = Vector2(0.5, 14)
+shape = SubResource("RectangleShape2D_i4jpx")
+
+[node name="TextBox" parent="." instance=ExtResource("2_kpv0q")]
+offset_left = -104.0
+offset_top = -61.0
+offset_right = -104.0
+offset_bottom = -61.0

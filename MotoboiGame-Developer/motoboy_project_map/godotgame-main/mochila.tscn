@@ -1,0 +1,68 @@
+[gd_scene load_steps=13 format=3 uid="uid://b6aove13nbltw"]
+
+[ext_resource type="Script" uid="uid://bmo6baof1shfb" path="res://mochila.gd" id="1_jkfcs"]
+[ext_resource type="Texture2D" uid="uid://b8po3iv5wfpr6" path="res://mochila/sprite_0.png" id="1_mlenl"]
+[ext_resource type="Texture2D" uid="uid://cm7qqy4v6yxja" path="res://mochila/sprite_1.png" id="2_j1qqn"]
+[ext_resource type="Texture2D" uid="uid://7r65ogjho8o7" path="res://mochila/sprite_2.png" id="3_jkfcs"]
+[ext_resource type="Texture2D" uid="uid://fuy8dp78nqfs" path="res://mochila/sprite_3.png" id="4_wdn1i"]
+[ext_resource type="Texture2D" uid="uid://d386xgq2wcfcj" path="res://mochila/sprite_4.png" id="5_boh0c"]
+[ext_resource type="Texture2D" uid="uid://g6r1tcgxgdri" path="res://mochila/sprite_5.png" id="6_kchce"]
+[ext_resource type="Texture2D" uid="uid://drvyfj0ccoc2y" path="res://mochila/sprite_6.png" id="7_w7hpx"]
+[ext_resource type="PackedScene" uid="uid://cby3je5g3mwds" path="res://Interactable.tscn" id="8_j1qqn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mjq3h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_mlenl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_j1qqn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jkfcs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wdn1i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_boh0c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kchce")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_w7hpx")
+}],
+"loop": true,
+"name": &"default_mochila",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7iph"]
+size = Vector2(27, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jkfcs"]
+size = Vector2(28, 25)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_jkfcs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-6, 6)
+scale = Vector2(1.375, 1.375)
+sprite_frames = SubResource("SpriteFrames_mjq3h")
+animation = &"default_mochila"
+frame_progress = 0.010787936
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-9.5, 7)
+shape = SubResource("RectangleShape2D_o7iph")
+
+[node name="Interactable" parent="." instance=ExtResource("8_j1qqn")]
+interact_name = "E para Vincular"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+visible = false
+position = Vector2(-9, 6.5)
+shape = SubResource("RectangleShape2D_jkfcs")
