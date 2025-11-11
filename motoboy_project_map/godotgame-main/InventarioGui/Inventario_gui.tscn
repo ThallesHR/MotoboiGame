@@ -1,0 +1,189 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqs0myj2745d"]
+
+[ext_resource type="Script" uid="uid://cser6co6fgylx" path="res://InventarioGui/inventario_gui.gd" id="1_1cq12"]
+[ext_resource type="Texture2D" uid="uid://b8icuevglyibd" path="res://InventarioGui/resources/panelblack.png" id="2_1cq12"]
+[ext_resource type="PackedScene" uid="uid://bp143dfap67ft" path="res://InventarioGui/slot.tscn" id="2_tr3bk"]
+[ext_resource type="Texture2D" uid="uid://b15bvyvub8el8" path="res://idle/sprite_08.png" id="3_xo131"]
+[ext_resource type="FontFile" uid="uid://b8ewvry8ia7d6" path="res://DeterminationMonoWebRegular-Z5oq.ttf" id="5_hbwsv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1cq12"]
+font = ExtResource("5_hbwsv")
+font_size = 36
+
+[node name="InventarioGui" type="Control"]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -90.5
+offset_right = -754.9221
+offset_bottom = -377.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1cq12")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3974305
+anchor_top = 0.3326389
+anchor_right = 1.2515973
+anchor_bottom = 1.1868056
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1cq12")
+patch_margin_left = 43
+patch_margin_top = 43
+patch_margin_right = 43
+patch_margin_bottom = 43
+metadata/_edit_use_anchors_ = true
+
+[node name="GridHabilidades" type="GridContainer" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 396.0
+offset_top = 182.0
+offset_right = 644.0
+offset_bottom = 443.0
+columns = 3
+
+[node name="SlotH1" parent="NinePatchRect/GridHabilidades" instance=ExtResource("2_tr3bk")]
+layout_mode = 2
+
+[node name="SlotH2" parent="NinePatchRect/GridHabilidades" instance=ExtResource("2_tr3bk")]
+layout_mode = 2
+
+[node name="SlotH3" parent="NinePatchRect/GridHabilidades" instance=ExtResource("2_tr3bk")]
+layout_mode = 2
+
+[node name="HBoxPlayer3" type="HBoxContainer" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 705.0
+offset_right = 1085.0
+offset_bottom = 116.0
+alignment = 1
+
+[node name="Label" type="Label" parent="NinePatchRect/HBoxPlayer3"]
+layout_mode = 2
+text = "Itens"
+label_settings = SubResource("LabelSettings_1cq12")
+horizontal_alignment = 1
+
+[node name="HBoxPlayer2" type="HBoxContainer" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 336.0
+offset_right = 663.0
+offset_bottom = 116.0
+alignment = 1
+
+[node name="Label" type="Label" parent="NinePatchRect/HBoxPlayer2"]
+layout_mode = 2
+text = "Habilidades"
+label_settings = SubResource("LabelSettings_1cq12")
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="NinePatchRect"]
+anchors_preset = 0
+offset_left = 109.0
+offset_right = 109.0
+offset_bottom = 122.0
+
+[node name="SlotPoder1" parent="NinePatchRect/Control" instance=ExtResource("2_tr3bk")]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 474.0
+offset_right = 270.0
+offset_bottom = 554.0
+
+[node name="SlotPoder2" parent="NinePatchRect/Control" instance=ExtResource("2_tr3bk")]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 474.0
+offset_right = 126.0
+offset_bottom = 554.0
+
+[node name="SlotPoder3" parent="NinePatchRect/Control" instance=ExtResource("2_tr3bk")]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 474.0
+offset_right = 198.0
+offset_bottom = 554.0
+
+[node name="SlotPoder4" parent="NinePatchRect/Control" instance=ExtResource("2_tr3bk")]
+layout_mode = 0
+offset_left = -26.0
+offset_top = 474.0
+offset_right = 54.0
+offset_bottom = 554.0
+
+[node name="SlotPunhos" parent="NinePatchRect/Control" instance=ExtResource("2_tr3bk")]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 330.0
+offset_right = 183.0
+offset_bottom = 388.0
+
+[node name="SlotCapacete" parent="NinePatchRect/Control" instance=ExtResource("2_tr3bk")]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 246.0
+offset_right = 181.0
+offset_bottom = 304.0
+
+[node name="Sprite2D" type="Sprite2D" parent="NinePatchRect/Control"]
+position = Vector2(14.999981, 384.99997)
+scale = Vector2(6.925, 6.925)
+texture = ExtResource("3_xo131")
+
+[node name="GridItens" type="GridContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -332.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+columns = 3
+
+[node name="SlotI9" parent="NinePatchRect/GridItens" instance=ExtResource("2_tr3bk")]
+layout_mode = 2
+
+[node name="SlotI8" parent="NinePatchRect/GridItens" instance=ExtResource("2_tr3bk")]
+layout_mode = 2
+
+[node name="SlotI7" parent="NinePatchRect/GridItens" instance=ExtResource("2_tr3bk")]
+layout_mode = 2
+
+[node name="SlotI6" parent="NinePatchRect/GridItens" instance=ExtResource("2_tr3bk")]
+layout_mode = 2
+
+[node name="SlotI5" parent="NinePatchRect/GridItens" instance=ExtResource("2_tr3bk")]
+layout_mode = 2
+
+[node name="SlotI4" parent="NinePatchRect/GridItens" instance=ExtResource("2_tr3bk")]
+layout_mode = 2
+
+[node name="SlotI3" parent="NinePatchRect/GridItens" instance=ExtResource("2_tr3bk")]
+layout_mode = 2
+
+[node name="SlotI2" parent="NinePatchRect/GridItens" instance=ExtResource("2_tr3bk")]
+layout_mode = 2
+
+[node name="SlotI1" parent="NinePatchRect/GridItens" instance=ExtResource("2_tr3bk")]
+layout_mode = 2
+
+[node name="HBoxPlayer" type="HBoxContainer" parent="NinePatchRect"]
+layout_mode = 0
+offset_right = 309.0
+offset_bottom = 116.0
+alignment = 1
+
+[node name="Label" type="Label" parent="NinePatchRect/HBoxPlayer"]
+layout_mode = 2
+text = "Armas"
+label_settings = SubResource("LabelSettings_1cq12")
+horizontal_alignment = 1

@@ -1,0 +1,650 @@
+[gd_scene load_steps=63 format=3 uid="uid://bcejlp635w4xo"]
+
+[ext_resource type="Texture2D" uid="uid://ca82vvtsds0yi" path="res://jump_animation/sprite_25.png" id="1_7hik5"]
+[ext_resource type="Texture2D" uid="uid://ci4fjehqt6heh" path="res://Damage/damage0.png" id="1_hl5qd"]
+[ext_resource type="Texture2D" uid="uid://oncm2udakce1" path="res://Damage/damage1.png" id="2_ek41f"]
+[ext_resource type="Texture2D" uid="uid://cw3nrjpsvx6c2" path="res://jump_animation/sprite_26.png" id="2_qtqh7"]
+[ext_resource type="Texture2D" uid="uid://cvbyf1lxiyq4u" path="res://Morto/sprite_0.png" id="3_1xqrm"]
+[ext_resource type="Texture2D" uid="uid://d1wukxxiyxpp8" path="res://jump_animation/sprite_23.png" id="3_2wuci"]
+[ext_resource type="Texture2D" uid="uid://j0v4qxu0a4q3" path="res://Morto/sprite_1.png" id="4_bfour"]
+[ext_resource type="Texture2D" uid="uid://c3bbkavskem06" path="res://jump_animation/sprite_24.png" id="4_iruf7"]
+[ext_resource type="Texture2D" uid="uid://dqasidcnq1ova" path="res://Morto/sprite_2.png" id="5_8gr2b"]
+[ext_resource type="Texture2D" uid="uid://se1ydmaf626k" path="res://run/sprite_17.png" id="5_j5n4i"]
+[ext_resource type="Texture2D" uid="uid://578qlv4tdofg" path="res://run/sprite_18.png" id="6_634y6"]
+[ext_resource type="Texture2D" uid="uid://cfe58er3hd0xj" path="res://Morto/sprite_3.png" id="6_vl8ci"]
+[ext_resource type="Texture2D" uid="uid://bmtj6pgbkc4fe" path="res://run/sprite_19.png" id="7_efrwb"]
+[ext_resource type="Texture2D" uid="uid://bv83qt1v2qjfm" path="res://Morto/sprite_4.png" id="7_ieltc"]
+[ext_resource type="Texture2D" uid="uid://ohs4aute4j4s" path="res://Morto/sprite_5.png" id="8_fddr8"]
+[ext_resource type="Texture2D" uid="uid://br2mdsnpev7jg" path="res://run/sprite_20.png" id="8_hiqhm"]
+[ext_resource type="Texture2D" uid="uid://b624c43retfa6" path="res://Morto/sprite_6.png" id="9_oybyf"]
+[ext_resource type="Texture2D" uid="uid://bj0ui1qr3ih57" path="res://run/sprite_21.png" id="9_tkwlq"]
+[ext_resource type="Texture2D" uid="uid://bm4n8sqs57i6t" path="res://Morto/sprite_7.png" id="10_ajfva"]
+[ext_resource type="Texture2D" uid="uid://c3b5mruescduf" path="res://run/sprite_22.png" id="10_hl5qd"]
+[ext_resource type="Texture2D" uid="uid://by64y28ul5lw2" path="res://Morto/sprite_8.png" id="11_5ef02"]
+[ext_resource type="Texture2D" uid="uid://ck6u04c1wwe22" path="res://soco/soco0.png" id="11_efrwb"]
+[ext_resource type="Texture2D" uid="uid://dwuole3yliwjl" path="res://walk/boi0.png" id="11_ek41f"]
+[ext_resource type="Texture2D" uid="uid://dbr72yfbds01x" path="res://soco/soco1.png" id="12_hiqhm"]
+[ext_resource type="Texture2D" uid="uid://de4dkvasdfkqw" path="res://walk/boi1.png" id="12_khis8"]
+[ext_resource type="Texture2D" uid="uid://640iukhxo14x" path="res://walk/boi2.png" id="13_b88wv"]
+[ext_resource type="Texture2D" uid="uid://db1kwny7v7nf7" path="res://soco/soco2.png" id="13_tkwlq"]
+[ext_resource type="Texture2D" uid="uid://c5u7n80htrs31" path="res://soco/soco3.png" id="14_hl5qd"]
+[ext_resource type="Texture2D" uid="uid://ch7tvqokfkbys" path="res://walk/boi3.png" id="14_pgbbb"]
+[ext_resource type="Texture2D" uid="uid://cwhlpiknmm531" path="res://walk/boi4.png" id="15_331ug"]
+[ext_resource type="Texture2D" uid="uid://doccc11726ad7" path="res://soco/soco4.png" id="15_ek41f"]
+[ext_resource type="Texture2D" uid="uid://gmfew1ei6gw3" path="res://soco/soco5.png" id="16_khis8"]
+[ext_resource type="Texture2D" uid="uid://bex5uhh5fx0yi" path="res://walk/boi5.png" id="16_ny14h"]
+[ext_resource type="Texture2D" uid="uid://bmewlx67415s8" path="res://powerbean/sprite_0.png" id="16_pfmca"]
+[ext_resource type="Texture2D" uid="uid://ckrddvgnpk12y" path="res://powerbean/sprite_1.png" id="17_76oay"]
+[ext_resource type="Texture2D" uid="uid://crdf45y6qoktb" path="res://walk/boi6.png" id="17_ibah8"]
+[ext_resource type="Texture2D" uid="uid://c7px0snxhpi42" path="res://walk/boi7.png" id="18_3iwfv"]
+[ext_resource type="Texture2D" uid="uid://dotowsaixk2eo" path="res://powerbean/sprite_2.png" id="18_b4uyv"]
+[ext_resource type="Texture2D" uid="uid://b15bvyvub8el8" path="res://idle/sprite_08.png" id="19_qwsg1"]
+[ext_resource type="Texture2D" uid="uid://gm2rlke4k3tt" path="res://powerbean/sprite_3.png" id="19_tw8ou"]
+[ext_resource type="Texture2D" uid="uid://brvysgatfs7in" path="res://idle/sprite_09.png" id="20_1xqrm"]
+[ext_resource type="Texture2D" uid="uid://caqmrq0qt0pw5" path="res://powerbean/sprite_4.png" id="20_ygbnx"]
+[ext_resource type="Texture2D" uid="uid://bp8ypgbyb2ijm" path="res://idle/sprite_10.png" id="21_bfour"]
+[ext_resource type="Texture2D" uid="uid://05c8w523061k" path="res://powerbean/sprite_5.png" id="21_v2t6f"]
+[ext_resource type="Texture2D" uid="uid://dfnk3q58o42qa" path="res://idle/sprite_11.png" id="22_8gr2b"]
+[ext_resource type="Texture2D" uid="uid://bpdrok5tm7h8s" path="res://powerbean/sprite_6.png" id="22_l3lcn"]
+[ext_resource type="Texture2D" uid="uid://dfs03doxoa1h8" path="res://idle/sprite_12.png" id="23_vl8ci"]
+[ext_resource type="Texture2D" uid="uid://cq57bgyyarafg" path="res://powerbean/sprite_7.png" id="23_xry5e"]
+[ext_resource type="Texture2D" uid="uid://cjpppv3c7y7bp" path="res://idle/sprite_13.png" id="24_ieltc"]
+[ext_resource type="Texture2D" uid="uid://b3htrtsjt4v5n" path="res://idle/sprite_14.png" id="25_fddr8"]
+[ext_resource type="Texture2D" uid="uid://d31p5m3lngv11" path="res://idle/sprite_15.png" id="26_oybyf"]
+[ext_resource type="Script" uid="uid://cr1xdy1k8qdmc" path="res://Hitbox.gd" id="33_hiqhm"]
+[ext_resource type="Script" uid="uid://cxpqj6vsfqgyc" path="res://PlayerHurtbox.gd" id="36_ek41f"]
+[ext_resource type="PackedScene" uid="uid://bvfpmfp36dlyv" path="res://interacting_component.tscn" id="46_bfour"]
+[ext_resource type="AudioStream" uid="uid://2xo72j34ds7y" path="res://audios/Hamburgaoataque.ogg" id="55_76oay"]
+
+[sub_resource type="GDScript" id="GDScript_ajfva"]
+script/source = "extends CharacterBody2D
+
+signal healthChange 
+signal player_died 
+
+@onready var sfx_disparo = $sfx_disparo
+@onready var ponto_de_disparo: Marker2D = $PontoDeDisparo
+var hamburgao_projetil_scene = preload(\"res://Hamburgao_poder.tscn\")
+@export var vida_maxima: int = 5
+@onready var vida_atual = vida_maxima: 
+	set(value):
+		vida_atual = clamp(value, 0, vida_maxima) 
+		healthChange.emit(vida_atual) 
+		if vida_atual <= 0:
+			_morrer_player() 
+
+# --- Variáveis de Knockback (Ajuste esses valores) ---
+@export var KNOCKBACK_X_STRENGTH: float = 100.0 # Força horizontal
+@export var KNOCKBACK_Y_STRENGTH: float = -90.0 # Força vertical (pulinho)
+@onready var AtaqueTimer:Timer =$AttackTimer
+var can_move: bool = true
+
+@onready var hitbox_collision: CollisionShape2D = $Hitbox/CollisionShape2D
+var aceleracao: float = 600
+var desaceleracao: float = 1000
+var velocidade_maxima_x: float = 100
+
+var jump_height: float = 50
+var time_apice_pulo: float = 0.3
+var pulo_speed: float
+var gravidade: float
+
+var is_attacking: bool = false
+var is_dead: bool = false
+var is_taking_damage: bool = false # Renomeado para 'is_invincible' mentalmente
+var can_double_jump: bool = true
+var has_double_jumped: bool = false
+
+# --- Referência ao novo Timer ---
+@onready var hurt_timer: Timer = $HurtTimer
+func _ready():
+	GameManager.set_player(self)
+	pulo_speed = (jump_height * 2) / time_apice_pulo
+	gravidade = (jump_height * 2) / pow(time_apice_pulo, 2)
+	hitbox_collision.disabled = true
+	$AnimatedSprite2D.animation_finished.connect(_on_animated_sprite_2d_animation_finished)
+	healthChange.emit(vida_atual)
+	$ataque_poder.animation_finished.connect(_on_ataque_poder_finished)
+
+func _physics_process(delta):
+	if not can_move:
+		return
+	if is_on_floor():
+		can_double_jump = true
+		has_double_jumped = false
+	if is_dead:
+		velocity.y += gravidade * delta * 0.5 
+		move_and_slide()
+		return
+		
+	# A gravidade agora é aplicada fora de handle_input
+	velocity.y += gravidade * delta
+
+	# Se estiver tomando dano, a lógica de knockback (velocidade) já foi aplicada
+	# Não chamamos handle_input, mas o move_and_slide ainda roda
+	if not is_taking_damage:
+		handle_input(delta)
+	
+	move_and_slide()
+	update_animations()
+
+func handle_input(delta):
+	# Se estiver atacando ou morto (is_taking_damage é tratado em _physics_process)
+	if is_attacking or is_dead:
+		velocity.x = move_toward(velocity.x, 0, desaceleracao * delta)
+		return
+
+	var input_axis = Input.get_axis(\"ui_left\", \"ui_right\")
+	
+	if input_axis != 0:
+		var target_speed = velocidade_maxima_x
+		if Input.is_action_pressed(\"run\"):
+			target_speed *= 2
+		velocity.x = move_toward(velocity.x, target_speed * input_axis, aceleracao * delta)
+	else:
+		velocity.x = move_toward(velocity.x, 0, desaceleracao * delta)
+	
+
+	if Input.is_action_just_pressed(\"ui_jump\"):
+		if is_on_floor():
+			velocity.y = -pulo_speed * 0.9
+		elif can_double_jump and not has_double_jumped:
+			velocity.y = -pulo_speed
+			has_double_jumped = true
+			can_double_jump = false
+			$AnimatedSprite2D.play(\"animation_jump\")
+	
+	if Input.is_action_just_pressed(\"ui_punch\") and is_on_floor():
+		is_attacking = true
+		$AnimatedSprite2D.play(\"animation_soco\")
+		hitbox_collision.set_deferred(\"disabled\", false)
+		AtaqueTimer.start()
+	# No Player.gd
+
+# (Verifica se tem o poder, etc...)
+	if Input.is_action_just_pressed(\"Hamburgao\"):
+		if is_attacking:
+			return
+		if InventoryManager.is_power_equipped(\"hamburgao\"):
+			is_attacking =true
+			$ataque_poder.play(\"ataque_poder\")
+		else:
+			print(\"você nao pode fazer isso\")
+		
+
+func update_animations():
+	if is_dead or is_attacking or is_taking_damage:
+		return
+
+	if not is_on_floor():
+		if velocity.y < 0:
+			$AnimatedSprite2D.play(\"animation_jump\")
+		else:
+			$AnimatedSprite2D.play(\"animation_fall\")
+	else:
+		var input_axis = Input.get_axis(\"ui_left\", \"ui_right\")
+		if input_axis != 0:
+			$AnimatedSprite2D.flip_h = (input_axis < 0)
+			if abs(velocity.x) > velocidade_maxima_x + 1:
+				$AnimatedSprite2D.play(\"animation_run\")
+			else:
+				$AnimatedSprite2D.play(\"animation_walk\")
+		else:
+			$AnimatedSprite2D.play(\"idle\")
+
+
+func _on_animated_sprite_2d_animation_finished():
+	var current_animation = $AnimatedSprite2D.animation
+	
+	# NÃO precisamos mais verificar \"animation_damage\" aqui
+	
+	if current_animation == \"animation_death\":
+		pass # A lógica de morte agora está em _morrer_player
+			 # (especificamente no 'await')
+
+# --- FUNÇÕES DE VIDA E MORTE (MODIFICADAS) ---
+
+func take_damage(amount: int, damage_source: Node2D) -> void:
+	# Cooldown/Invencibilidade: Se já está em hit, não faz nada.
+	if is_dead or is_taking_damage: 
+		return
+
+	print(\"===== 1. TAKE_DAMAGE CHAMADO =====\")
+	is_taking_damage = true 
+	
+	if hurt_timer == null:
+		print(\"ERRO CRÍTICO: HurtTimer não encontrado!\")
+		return
+		
+	print(\"===== 2. INICIANDO TIMER DE INVENCIBILIDADE =====\")
+	hurt_timer.start() # Inicia o cooldown
+
+	vida_atual -= amount 
+	
+	if is_dead:
+		return 
+
+	$AnimatedSprite2D.modulate = Color.WHITE # Adiciona o flash
+	$AnimatedSprite2D.play(\"animation_damage\")
+
+	# --- APLICA O KNOCKBACK (Com a correção de segurança) ---
+	
+	var knockback_x_vel: float = 0.0 # Valor padrão
+
+	if is_instance_valid(damage_source):
+		var source_pos_x = damage_source.global_position.x
+		var knockback_direction = sign(global_position.x - source_pos_x)
+		if knockback_direction == 0:
+			knockback_direction = 1.0 if randf() > 0.5 else -1.0
+		knockback_x_vel = knockback_direction * KNOCKBACK_X_STRENGTH
+	else:
+		knockback_x_vel = -$AnimatedSprite2D.scale.x * KNOCKBACK_X_STRENGTH * 0.5 
+	
+	velocity.x = knockback_x_vel
+	velocity.y = KNOCKBACK_Y_STRENGTH # \"Pulinho\"
+	
+	print(\"===== 3. DANO E KNOCKBACK APLICADOS =====\")
+
+# --- FUNÇÃO DE MORTE (ATUALIZADA) ---
+func _morrer_player():
+	if is_dead:
+		return
+		
+	print(\"Player Morreu!\")
+	is_dead = true
+	is_taking_damage = false # Garante que sai do estado de dano
+	hurt_timer.stop() # Para o timer de invencibilidade
+	player_died.emit() 
+
+	$CollisionShape2D.disabled = true 
+	if $PlayerHurtbox: # Verifica se o nó existe
+		$PlayerHurtbox.monitoring = false # Para de detectar
+		$PlayerHurtbox.monitorable = false 
+	
+	$AnimatedSprite2D.play(\"animation_death\")
+
+	# --- MUDANÇA EXECUTADA ---
+	
+	# 1. Espera a animação de morte terminar
+	await $AnimatedSprite2D.animation_finished 
+	
+	# 2. CHAMA O FADE (que implementamos antes)
+	if SceneTransition: # Checagem de segurança
+		SceneTransition.reload_current_scene_with_fade()
+	else:
+		# Se o SceneTransition não for encontrado
+		get_tree().reload_current_scene()
+
+# --- NOVA FUNÇÃO CONECTADA AO SINAL DO TIMER ---
+func _on_hurt_timer_timeout():
+	print(\"===== 4. HURT_TIMER TERMINOU! (TIMEOUT) =====\")
+	is_taking_damage = false # Termina a invencibilidade
+	# Reseta o \"flash\" de dano
+	$AnimatedSprite2D.modulate = Color(1, 1, 1, 1) # (Ou Color.WHITE se preferir)
+	
+	print(\"===== 5. PLAYER DESTRAVADO =====\")
+
+
+func _on_attack_timer_timeout() -> void:
+	is_attacking = false
+	hitbox_collision.set_deferred(\"disabled\", true)
+
+# No seu \"Player.gd\"
+
+func _disparar_hamburgao():
+	# 1. Cria uma instância do projétil
+	sfx_disparo.play()
+	var projetil = hamburgao_projetil_scene.instantiate()
+	
+	# 2. Pega o nó de sprite do PLAYER (o seu AnimatedSprite2D)
+	var player_sprite = $AnimatedSprite2D
+	
+	# 3. Pega o nó de sprite do PROJÉTIL (o AnimatedSprite2D dentro dele)
+	#    (Certifique-se que o sprite dentro de \"HamburgaoProjetil.tscn\" 
+	#    se chama \"AnimatedSprite2D\")
+	var projetil_sprite = projetil.get_node(\"AnimatedSprite2D\")
+
+	# 4. Configura o projétil
+	if player_sprite.flip_h:
+		projetil.direcao = -1       # Diz ao SCRIPT para mover para a esquerda
+		projetil_sprite.flip_h = true # Diz ao VISUAL para virar para a esquerda
+	else:
+		projetil.direcao = 1        # Diz ao SCRIPT para mover para a direita
+		projetil_sprite.flip_h = false # Diz ao VISUAL para virar para a direita
+	
+	# 5. Define a posição e adiciona ao mundo
+	projetil.global_position = $PontoDeDisparo.global_position # (Use o nome do seu Marker2D)
+	get_parent().add_child(projetil)
+	
+func _on_ataque_poder_finished(anim_name):
+	# (Verifica se foi a animação correta que terminou)
+	if anim_name == \"ataque_poder\":
+		is_attacking = false
+
+func set_input_enabled(is_enabled: bool):
+	can_move = is_enabled
+	if not is_enabled:
+		velocity = Vector2.ZERO
+
+func play_animation_and_wait():
+	$AnimatedSprite2D.play(\"animation_power\")
+	
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5ef02"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hl5qd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ek41f")
+}],
+"loop": true,
+"name": &"animation_damage",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_1xqrm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bfour")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8gr2b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vl8ci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ieltc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_fddr8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_oybyf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ajfva")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_5ef02")
+}],
+"loop": false,
+"name": &"animation_death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7hik5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_qtqh7")
+}],
+"loop": true,
+"name": &"animation_fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_2wuci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_iruf7")
+}],
+"loop": true,
+"name": &"animation_jump",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_pfmca")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_76oay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_b4uyv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_tw8ou")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_ygbnx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_v2t6f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_l3lcn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_xry5e")
+}],
+"loop": false,
+"name": &"animation_power",
+"speed": 40.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_j5n4i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_634y6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_efrwb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_hiqhm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_tkwlq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_hl5qd")
+}],
+"loop": true,
+"name": &"animation_run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_efrwb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_hiqhm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_tkwlq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_hl5qd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ek41f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_khis8")
+}],
+"loop": false,
+"name": &"animation_soco",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_ek41f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_khis8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_b88wv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_pgbbb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_331ug")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ny14h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_ibah8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_3iwfv")
+}],
+"loop": true,
+"name": &"animation_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_qwsg1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_1xqrm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_bfour")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_8gr2b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_vl8ci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_ieltc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_fddr8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_oybyf")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pfmca"]
+size = Vector2(20, 28.5155)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tkwlq"]
+radius = 20.0
+height = 40.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_khis8"]
+size = Vector2(20, 29)
+
+[sub_resource type="Animation" id="Animation_pfmca"]
+resource_name = "ataque_poder"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"animation_power", 1.0, false],
+"method": &"play"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_disparar_hamburgao"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_76oay"]
+_data = {
+&"ataque_poder": SubResource("Animation_pfmca")
+}
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 2
+collision_mask = 17
+script = SubResource("GDScript_ajfva")
+
+[node name="sfx_disparo" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("55_76oay")
+attenuation = 0.26794344
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.4210855e-14, -1)
+scale = Vector2(1.18824, 1.0863)
+sprite_frames = SubResource("SpriteFrames_5ef02")
+animation = &"animation_power"
+frame = 7
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(1, -4.25775)
+shape = SubResource("RectangleShape2D_pfmca")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3.5, 3.5)
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("33_hiqhm")
+metadata/_custom_type_script = "uid://cr1xdy1k8qdmc"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(1, -11)
+shape = SubResource("CapsuleShape2D_tkwlq")
+disabled = true
+
+[node name="PlayerHurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 64
+monitorable = false
+script = ExtResource("36_ek41f")
+metadata/_custom_type_script = "uid://cxpqj6vsfqgyc"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
+position = Vector2(1, -4.5)
+shape = SubResource("RectangleShape2D_khis8")
+
+[node name="HurtTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="InteractingComponent" parent="." instance=ExtResource("46_bfour")]
+
+[node name="ataque_poder" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_76oay")
+}
+
+[node name="PontoDeDisparo" type="Marker2D" parent="."]
+position = Vector2(22, -6)
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

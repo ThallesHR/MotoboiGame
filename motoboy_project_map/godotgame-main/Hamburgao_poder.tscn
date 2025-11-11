@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://cn250ofskwt5v"]
+
+[ext_resource type="Texture2D" uid="uid://s08nk7pqcnew" path="res://poderes/hamburgao/sprite_0.png" id="1_qyfpb"]
+[ext_resource type="Script" uid="uid://dwplcx32pc5sl" path="res://hamburgao_poder.gd" id="1_s18si"]
+[ext_resource type="Texture2D" uid="uid://dm5k4t6q811ym" path="res://poderes/hamburgao/sprite_1.png" id="2_s18si"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cp85c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qyfpb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_s18si")
+}],
+"loop": true,
+"name": &"hamburgao",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lcbw4"]
+radius = 19.416489
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_s18si")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1.9073486e-06, -0.9999981)
+scale = Vector2(0.51, 0.51)
+sprite_frames = SubResource("SpriteFrames_cp85c")
+animation = &"hamburgao"
+frame_progress = 0.2659517
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lcbw4")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

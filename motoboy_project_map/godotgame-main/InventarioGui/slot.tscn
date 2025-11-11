@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://bp143dfap67ft"]
+
+[ext_resource type="Script" uid="uid://di7kjrxaoucny" path="res://InventarioGui/slot.gd" id="1_myjol"]
+[ext_resource type="Texture2D" uid="uid://07v3ncy5r08j" path="res://InventarioGui/resources/butonnnormal.png" id="1_qd8t0"]
+[ext_resource type="Texture2D" uid="uid://3nn8ujxe8rfg" path="res://InventarioGui/resources/butonnsegurado.png" id="2_o5ol0"]
+[ext_resource type="Texture2D" uid="uid://r51go6f412k7" path="res://items_icons/punhos.png" id="4_neqjd"]
+
+[node name="Botao" type="TextureButton"]
+custom_minimum_size = Vector2(80, 80)
+offset_right = 49.0
+offset_bottom = 48.0
+texture_normal = ExtResource("1_qd8t0")
+texture_hover = ExtResource("2_o5ol0")
+script = ExtResource("1_myjol")
+
+[node name="Icone" type="Sprite2D" parent="."]
+position = Vector2(22, 26)
+scale = Vector2(3, 3)
+texture = ExtResource("4_neqjd")
