@@ -1,0 +1,20 @@
+# === GODOT ===
+.godot/
+.import/
+export.cfg
+export_presets.cfg
+
+# Logs e backups
+*.log
+*.tmp
+*.bak
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Compilação e shaders
+*.vulkan.cache
+*.shader_cache
+*.import

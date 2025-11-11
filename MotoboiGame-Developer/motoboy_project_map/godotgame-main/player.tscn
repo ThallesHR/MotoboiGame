@@ -62,28 +62,38 @@ signal player_died
 			_morrer_player() 
 
 # --- Variáveis de Knockback (Ajuste esses valores) ---
-@export var KNOCKBACK_X_STRENGTH: float = 100.0 # Força horizontal
-@export var KNOCKBACK_Y_STRENGTH: float = -90.0 # Força vertical (pulinho)
-@onready var AtaqueTimer:Timer =$AttackTimer
-
+@export var KNOCKBACK_X_STRENGTH: float = 100.0  # Força horizontal
+@export var KNOCKBACK_Y_STRENGTH: float = -90.0  # Força vertical (pulinho)
+@onready var AtaqueTimer: Timer = $AttackTimer
 @onready var hitbox_collision: CollisionShape2D = $Hitbox/CollisionShape2D
+
+# --- Movimento básico ---
 var aceleracao: float = 600
 var desaceleracao: float = 1000
 var velocidade_maxima_x: float = 100
 
+# --- Pulo e gravidade ---
 var jump_height: float = 50
 var time_apice_pulo: float = 0.3
 var pulo_speed: float
 var gravidade: float
 
+# --- Estados ---
 var is_attacking: bool = false
 var is_dead: bool = false
-var is_taking_damage: bool = false # Renomeado para 'is_invincible' mentalmente
+var is_taking_damage: bool = false
 var can_double_jump: bool = true
 var has_double_jumped: bool = false
 
-# --- Referência ao novo Timer ---
+# --- Wall slide / wall jump ---
+var is_wall_sliding: bool = false
+var wall_jump_allowed: bool = true
+@export var wall_slide_speed: float = 80.0
+@export var wall_jump_force: Vector2 = Vector2(200, -400)
+
+# --- Referência ao novo timer ---
 @onready var hurt_timer: Timer = $HurtTimer
+
 func _ready():
 	GameManager.set_player(self)
 	pulo_speed = (jump_height * 2) / time_apice_pulo
@@ -96,30 +106,58 @@ func _physics_process(delta):
 	if is_on_floor():
 		can_double_jump = true
 		has_double_jumped = false
+		is_wall_sliding = false
+
 	if is_dead:
 		velocity.y += gravidade * delta * 0.5 
 		move_and_slide()
 		return
 		
-	# A gravidade agora é aplicada fora de handle_input
+# A gravidade agora é aplicada fota de handle_input
 	velocity.y += gravidade * delta
-
-	# Se estiver tomando dano, a lógica de knockback (velocidade) já foi aplicada
-	# Não chamamos handle_input, mas o move_and_slide ainda roda
+# Se tiver tomando dano, a lógica de knockback (velocidade) já foi aplicada
+# Não chamamos handle_input, mas o move_and_slide ainda roda
 	if not is_taking_damage:
 		handle_input(delta)
 	
+	handle_wall_slide(delta)
+
 	move_and_slide()
 	update_animations()
 
+# ==========================
+#  FUNÇÕES DE PAREDE
+# ==========================
+
+func is_touching_wall() -> bool:
+	return is_on_wall_only() and not is_on_floor()
+
+func handle_wall_slide(delta):
+	if is_touching_wall() and velocity.y > 0 and Input.get_axis(\"ui_left\", \"ui_right\") != 0:
+		is_wall_sliding = true
+		velocity.y = min(velocity.y, wall_slide_speed)
+	else:
+		is_wall_sliding = false
+
+func perform_wall_jump():
+	var wall_dir = -sign(get_wall_normal().x)
+	velocity = Vector2(wall_dir * wall_jump_force.x, wall_jump_force.y)
+	is_wall_sliding = false
+	has_double_jumped = false # reseta o duplo pulo após o wall jump
+	wall_jump_allowed = false
+	await get_tree().create_timer(0.2).timeout
+	wall_jump_allowed = true
+
+
+
 func handle_input(delta):
-	# Se estiver atacando ou morto (is_taking_damage é tratado em _physics_process)
+	# Se estiver atacando ou morto (is_taing_damage é tratado em _physics_process)
 	if is_attacking or is_dead:
 		velocity.x = move_toward(velocity.x, 0, desaceleracao * delta)
 		return
 
 	var input_axis = Input.get_axis(\"ui_left\", \"ui_right\")
-	
+
 	if input_axis != 0:
 		var target_speed = velocidade_maxima_x
 		if Input.is_action_pressed(\"run\"):
@@ -128,25 +166,31 @@ func handle_input(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, desaceleracao * delta)
 	
-
+	# --- PULO ---
 	if Input.is_action_just_pressed(\"ui_jump\"):
-		if is_on_floor():
+		if is_wall_sliding and wall_jump_allowed:
+			perform_wall_jump()
+		elif is_on_floor():
 			velocity.y = -pulo_speed * 0.9
 		elif can_double_jump and not has_double_jumped:
 			velocity.y = -pulo_speed
 			has_double_jumped = true
 			can_double_jump = false
 			$AnimatedSprite2D.play(\"animation_jump\")
-	
+
+	# --- ATAQUE ---
 	if Input.is_action_just_pressed(\"ui_punch\") and is_on_floor():
 		is_attacking = true
 		$AnimatedSprite2D.play(\"animation_soco\")
 		hitbox_collision.set_deferred(\"disabled\", false)
 		AtaqueTimer.start()
-		
 
 func update_animations():
 	if is_dead or is_attacking or is_taking_damage:
+		return
+
+	if is_wall_sliding:
+		$AnimatedSprite2D.play(\"animation_wall_slide\")
 		return
 
 	if not is_on_floor():
@@ -165,17 +209,17 @@ func update_animations():
 		else:
 			$AnimatedSprite2D.play(\"idle\")
 
-
 func _on_animated_sprite_2d_animation_finished():
 	var current_animation = $AnimatedSprite2D.animation
 	
-	# NÃO precisamos mais verificar \"animation_damage\" aqui
+	# Não precisamos mais verificar \"animation_damage\" aqui
 	
 	if current_animation == \"animation_death\":
 		pass # A lógica de morte agora está em _morrer_player
-			 # (especificamente no 'await')
+				   # (especificamente no 'await')
 
-# --- FUNÇÕES DE VIDA E MORTE (MODIFICADAS) ---
+
+# --- FUNÇÕES DE VIDA E MORTE (MODIFICADAS)  ---
 
 func take_damage(amount: int, damage_source: Node2D) -> void:
 	# Cooldown/Invencibilidade: Se já está em hit, não faz nada.
@@ -191,19 +235,16 @@ func take_damage(amount: int, damage_source: Node2D) -> void:
 		
 	print(\"===== 2. INICIANDO TIMER DE INVENCIBILIDADE =====\")
 	hurt_timer.start() # Inicia o cooldown
-
 	vida_atual -= amount 
-	
 	if is_dead:
 		return 
 
 	$AnimatedSprite2D.modulate = Color.WHITE # Adiciona o flash
 	$AnimatedSprite2D.play(\"animation_damage\")
-
-	# --- APLICA O KNOCKBACK (Com a correção de segurança) ---
 	
-	var knockback_x_vel: float = 0.0 # Valor padrão
+# --- APLICA O KNOCKBACK (Com a correção de segurança) ---
 
+	var knockback_x_vel: float = 0.0 # Valor padrão
 	if is_instance_valid(damage_source):
 		var source_pos_x = damage_source.global_position.x
 		var knockback_direction = sign(global_position.x - source_pos_x)
@@ -215,7 +256,6 @@ func take_damage(amount: int, damage_source: Node2D) -> void:
 	
 	velocity.x = knockback_x_vel
 	velocity.y = KNOCKBACK_Y_STRENGTH # \"Pulinho\"
-	
 	print(\"===== 3. DANO E KNOCKBACK APLICADOS =====\")
 
 # --- FUNÇÃO DE MORTE (ATUALIZADA) ---
@@ -230,12 +270,11 @@ func _morrer_player():
 	player_died.emit() 
 
 	$CollisionShape2D.disabled = true 
-	if $PlayerHurtbox: # Verifica se o nó existe
+	if $PlayerHurtbox:  # Verifica se o nó existe
 		$PlayerHurtbox.monitoring = false # Para de detectar
 		$PlayerHurtbox.monitorable = false 
 	
 	$AnimatedSprite2D.play(\"animation_death\")
-
 	# --- MUDANÇA EXECUTADA ---
 	
 	# 1. Espera a animação de morte terminar
@@ -245,8 +284,7 @@ func _morrer_player():
 	if SceneTransition: # Checagem de segurança
 		SceneTransition.reload_current_scene_with_fade()
 	else:
-		# Se o SceneTransition não for encontrado
-		get_tree().reload_current_scene()
+		get_tree().reload_current_scene() # Se o SceneTransition não for encontrado
 
 # --- NOVA FUNÇÃO CONECTADA AO SINAL DO TIMER ---
 func _on_hurt_timer_timeout():
